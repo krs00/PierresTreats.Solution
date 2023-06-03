@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations; 
 
-namespace Factory.Models
+namespace Bakery.Models
 {
   public class Flavor
   {
