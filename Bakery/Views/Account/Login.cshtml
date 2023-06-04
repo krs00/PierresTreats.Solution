@@ -19,11 +19,18 @@
   @Html.LabelFor(m => m.Email)
   @Html.TextBoxFor(m => m.Email)
 
+  <br>
+  <br>
+
   @Html.LabelFor(m => m.Password)
   @Html.EditorFor(m => m.Password)
+
+  <br>
+  <br>
 
   <input type="submit" value="Log in" />
 }
 
-<p>@Html.ActionLink("Register for an account", "Register")</p>
-<p>@Html.ActionLink("Back to accounts page", "Index")</p>
+<br>
+<p>@Html.ActionLink("Register for an Account", "Register")</p>
+<p>@Html.ActionLink("Back To Accounts Page", "Index")</p>
