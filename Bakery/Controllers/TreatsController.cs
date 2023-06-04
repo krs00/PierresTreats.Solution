@@ -7,22 +7,22 @@ using System.Linq;
 
 namespace Bakery.Controllers
 {
-    public class TreatsController : Controller
+  public class TreatsController : Controller
+  {
+    private readonly BakeryContext _db;
+
+    public TreatsController(BakeryContext db)
     {
-        private readonly BakeryContext _db;
-
-        public TreatsController(BakeryContext db)
-        {
-            _db = db;
-        }
-
-        public ActionResult Index()
-        {
-            List<Treat> model = _db.Treats 
-                                            .ToList();
-            return View(model);
-        }
-
-
+      _db = db;
     }
+
+    public ActionResult Index()
+    {
+      List<Treat> model = _db.Treats
+                                      .ToList();
+      return View(model);
+    }
+
+
+  }
 }
