@@ -11,7 +11,9 @@
 * SQL
 * Entity Framework Core
 * ASP.NET Core
-* Pomelo Entity Framework Core 
+* Pomelo Entity Framework Core
+* EF Core Migrations
+
 
 ## Description
 
