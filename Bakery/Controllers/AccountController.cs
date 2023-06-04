@@ -4,7 +4,7 @@ using Bakery.Models;
 using System.Threading.Tasks;
 using Bakery.ViewModels;
 
-namespace Factory.Controllers
+namespace Bakery.Controllers
 {
     public class AccountController : Controller
     {
