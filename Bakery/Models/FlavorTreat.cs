@@ -10,5 +10,7 @@ namespace Bakery.Models
 
     public int TreatId { get; set; } // Foreign Key
     public Treat Treat { get; set; } // Reference Navigation Property
+
+    public ApplicationUser User { get; set; }
   }
 }
