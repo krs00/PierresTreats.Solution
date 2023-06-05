@@ -8,6 +8,7 @@
 
 <h2>Log in with your account!</h2>
 <hr />
+<br>
 
 @if(!ViewData.ModelState.IsValid) 
 {
@@ -32,5 +33,6 @@
 }
 
 <br>
-<p>@Html.ActionLink("Register for an Account", "Register")</p>
-<p>@Html.ActionLink("Back To Accounts Page", "Index")</p>
+<br>
+@* <p>@Html.ActionLink("Register for an Account", "Register")</p> *@
+<p>@Html.ActionLink("Back to Home Page", "Index", "Home")</p>
