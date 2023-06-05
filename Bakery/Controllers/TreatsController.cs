@@ -47,7 +47,7 @@ namespace Bakery.Controllers
     {
       Treat thisTreat = _db.Treats
                           .Include(treat => treat.FlavorTreats)
-                          .ThenInclude(join => join.Treat)
+                          .ThenInclude(join => join.Flavor)
                           .FirstOrDefault(treat => treat.TreatId == id);
       return View(thisTreat);
     }
