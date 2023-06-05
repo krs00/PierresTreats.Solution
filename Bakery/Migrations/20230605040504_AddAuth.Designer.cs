@@ -3,6 +3,7 @@ using System;
 using Bakery.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bakery.Migrations
 {
     [DbContext(typeof(BakeryContext))]
-    partial class BakeryContextModelSnapshot : ModelSnapshot
+    [Migration("20230605040504_AddAuth")]
+    partial class AddAuth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,11 +117,16 @@ namespace Bakery.Migrations
                     b.Property<int>("TreatId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("FlavorTreatId");
 
                     b.HasIndex("FlavorId");
 
                     b.HasIndex("TreatId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("FlavorTreats");
                 });
@@ -295,9 +302,15 @@ namespace Bakery.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Bakery.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Flavor");
 
                     b.Navigation("Treat");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Bakery.Models.Treat", b =>
