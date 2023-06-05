@@ -20,11 +20,38 @@ namespace Bakery.Controllers
     }
 
     [HttpGet("/")]
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
 
-      return View();
+      Dictionary<string, object[]> model = new Dictionary<string, object[]>();
+
+
+      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+
+
+      if (currentUser != null)
+      {
+        // GRAB ALL CURRENT USER TREATS
+        Treat[] treats = _db.Treats
+                   .Where(entry => entry.User.Id == currentUser.Id)
+                   .ToArray();
+        model.Add("treats", treats);
+
+        // GRAB ALL CURRENT USER FLAVORS
+        Flavor[] flavors = _db.Flavors
+            .Where(entry => entry.User.Id == currentUser.Id)
+            .ToArray();
+        model.Add("flavors", flavors);
+
+
+      }
+
+      return View(model);
     }
+
+
+
 
   }
 }
