@@ -32,7 +32,7 @@ Follow the instructions in the LearnHowToProgram.com lesson ["Creating a Test Da
 ### Set Up and Run Project
 
 1. Clone this repo.
-2. Open the terminal and navigate to this project's production directory called "Factory".
+2. Open the terminal and navigate to this project's production directory called "Bakery".
 3. Turn on "autosave" in VScode (Or your current IDE).
 4. Build the database with `dotnet ef database update` command.
 5. Within the production directory "HairSalon", create a new file called `appsettings.json`.
