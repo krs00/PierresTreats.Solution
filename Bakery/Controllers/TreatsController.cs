@@ -4,25 +4,33 @@ using Microsoft.AspNetCore.Mvc;
 using Bakery.Models;
 using System.Collections.Generic;
 using System.Linq;
-// using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bakery.Controllers
 {
-  // [Authorize] 
+  [Authorize] 
   public class TreatsController : Controller
   {
     private readonly BakeryContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public TreatsController(BakeryContext db)
+    public TreatsController(UserManager<ApplicationUser> userManager, BakeryContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
-      List<Treat> model = _db.Treats
+      string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      List<Treat> userItems = _db.Treats
+                                      .Where(entry => entry.User.Id == currentUser.Id)
                                       .ToList();
-      return View(model);
+      return View(userItems);
     }
 
     public ActionResult Create()
@@ -31,7 +39,7 @@ namespace Bakery.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Treat treat)
+    public async Task<ActionResult> Create(Treat treat)
     {
       if (!ModelState.IsValid)
       {
@@ -39,6 +47,9 @@ namespace Bakery.Controllers
       }
       else
       {
+        string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+        treat.User = currentUser;
         _db.Treats.Add(treat);
         _db.SaveChanges();
         return RedirectToAction("Index");
