@@ -2,14 +2,14 @@
   Layout = "_Layout";
 }
 
-<h1>Pierre's Bakery Accounts Page</h1>
+<h1>Are you sure you want to log out?</h1>
 <br>
 
 @if (User.Identity.IsAuthenticated)
 {
 
 
-  <p>Hello @User.Identity.Name!</p>
+  <p>log out for @User.Identity.Name</p>
 
   @* <h3>@Html.ActionLink("View Treats", "Index", "Treats")</h3>
 <br>
