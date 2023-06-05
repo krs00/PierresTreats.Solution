@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Bakery.Models;
 using System.Collections.Generic;
 using System.Linq;
+// using Microsoft.AspNetCore.Authorization;
 
 namespace Bakery.Controllers
 {
+  // [Authorize] 
   public class TreatsController : Controller
   {
     private readonly BakeryContext _db;
